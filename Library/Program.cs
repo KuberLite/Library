@@ -54,22 +54,26 @@ namespace Library
         {
             _context = new BookContext();
             Random rnd = new Random();
-            Console.WriteLine("How many authors?");
-            Console.WriteLine("Input an author last name:");
-            string lastName = Console.ReadLine();
             Console.WriteLine("Input a book name:");
             string bookName = Console.ReadLine();
             Console.WriteLine("Input a release year of book:");
             int releaseYear = Int32.Parse(Console.ReadLine());
-            _context.Books.Add(new Book()
+            Console.WriteLine("How many authors?");
+            int authCount = Int32.Parse(Console.ReadLine());
+            for (int i = 0; i < authCount; i++)
             {
-                BookId = Guid.NewGuid().ToString(),
-                BookNumber = rnd.Next(0, 100000),
-                BookName = bookName,
-                ReleaseYear = releaseYear,
-                AuthorNumber = rnd.Next(0, 100000),
-                AuthorLastName = lastName
-            });
+                Console.WriteLine("Input an author last name:");
+                string lastName = Console.ReadLine();
+                _context.Books.Add(new Book()
+                {
+                    BookId = Guid.NewGuid().ToString(),
+                    BookNumber = rnd.Next(0, 100000),
+                    BookName = bookName,
+                    ReleaseYear = releaseYear,
+                    AuthorNumber = rnd.Next(0, 100000),
+                    AuthorLastName = lastName
+                });
+            }
             _context.SaveChanges();
             Console.Clear();
             Console.WriteLine("Added");
